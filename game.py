@@ -77,6 +77,22 @@ class Game():
             # end main phase: 1
             # Total: 48
         self.phase = "main phase"
+        action = input("Please enter the next move: \
+                        \nPlay a card: \
+                        \n\t1. Player card \
+                        \n\t2. Crystal \
+                        \n\t3. Spark \
+                        \n\t4. - 40. for gems (10), spells (16), and relics (10) in order seen at https://aeonsend.fandom.com/wiki/Legacy#Supply_Card_Gallery \
+                        \nBuy cards from the shop \
+                        \n\t41. - 77., same order. \
+                        \nFocus a breach: \
+                        \n\t 78 - 80\
+                        \nOpen a breach: \
+                        \n\t 81-83 \
+                        \n84. Buy a charge\
+                        \n85. Activate charge power \
+                        \n86. End main phase \
+                        ")
         while len(self.hand):
             types_in_hand = [card.type for card in self.hand.pile]
             if "gem" in types_in_hand:
