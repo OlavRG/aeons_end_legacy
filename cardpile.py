@@ -25,8 +25,23 @@ class CardPile:
     def add_card(self, card):
         self.pile.append(card)
 
+    def add_cards(self, pile):
+        self.pile = self.pile + pile
+
+    def remove_card(self, card):
+        self.pile.remove(card)
+
     def draw(self):
         return self.pile.pop(0)
 
-    def get_card(self, card):
-        return self.pile.pop(self.pile.index(card))
+    def get_card_from_name(self, card_name: str):
+        pile_card_names = [card.name for card in self.pile]
+        card_index = pile_card_names.index(card_name)
+        card = self.pile[card_index]
+        return card
+
+    def get_card_from_type(self, card_type: str):
+        pile_card_types = [card.type for card in self.pile]
+        card_index = pile_card_types.index(card_type)
+        card = self.pile[card_index]
+        return card

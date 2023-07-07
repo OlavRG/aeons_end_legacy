@@ -17,10 +17,14 @@ if __name__ == '__main__':
     inputs.append(main_phase)
 
     test_game = Game(inputs)
+    print(test_game.hand)
+    test_game.breaches[0].prepare_spell(test_game.hand, test_game.hand.get_card_from_name("Crystal"))
+    test_game.breaches[0].prepare_spell(test_game.hand, test_game.hand.get_card_from_name("Spark"))
+    test_game.casting_phase(inputs)
     print(test_game)
-    print(test_game.hand.pile[0].card_type)
-    test_game.breaches[0].prepare_spell(test_game.hand.draw(Crystal))
-    test_game.breaches[0].prepare_spell(test_game.hand.draw(Spark))
+    test_game.main_phase(inputs)
+    print(test_game)
+    test_game.draw_phase(inputs)
     print(test_game)
 
 

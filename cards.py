@@ -11,21 +11,21 @@ from card import Card
 class Crystal(Card):
     def __init__(self):
         self.name = 'Crystal'
-        self.card_type = 'gem'
+        self.type = 'gem'
         self.cost = 0
-    
+
     def play(self, player):
         player.energy += 1
-        print(f"{player.name} cast {self.name}")
-        
+        print(f"{player.name} plays a {self.name}")
+
 class Spark(Card):
     def __init__(self):
         self.name = 'Spark'
-        self.card_type = 'spell'
+        self.type = 'spell'
         self.cost = 0
-    
+
     def play(self, player):
         player.damage_dealt += 1
         print(f"{player.name} cast {self.name}")
-        
+
 #TO DO: spells: Force Transfusion, Bending beam, Fire Chakram, gravity node

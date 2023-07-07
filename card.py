@@ -6,9 +6,9 @@ Created on Fri Mar 17 17:46:33 2023
 """
 
 class Card:
-    def __init__(self, name: str, card_type: str, cost: int):
+    def __init__(self, name: str, type: str, cost: int):
         self.name = name
-        self.card_type = card_type
+        self.type = type
         self.cost = cost
         
     def __str__(self):

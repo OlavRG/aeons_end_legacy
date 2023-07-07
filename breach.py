@@ -8,6 +8,7 @@ from cardpile import CardPile
 from player import Player
 from card import Card
 from hand import Hand
+from discardpile import DiscardPile
 
 class Breach(CardPile):
     def __init__(self, cost_to_open: int, cost_to_focus: int, focus_stage: int, breach_number: str):
@@ -48,8 +49,7 @@ class Breach(CardPile):
             self.focus_stage = 0
 
     def prepare_spell(self, hand: Hand, card: Card):
-        card = hand.draw(card)
-        if not card.card_type == "spell":
+        if not card.type == "spell":
             return print(f"Failed to prepare {card}: it is not a spell")
         if not self.focussed and not self.focus_stage == 0:
             return print("Breach " + self.breach_number + f": is not focussed nor open. Focus stage = {self.focus_stage}.")
@@ -59,11 +59,13 @@ class Breach(CardPile):
             return print("Breach " + self.breach_number + f": cannot prepare {card.name}. Breach is already occupied by {self.pile[0].name}")
         else:
             self.add_card(card)
-        
-    def cast(self, deck, player: Player):
+            hand.remove_card(card)
+            print("Prepared " + card.name + " to breach " + self.breach_number)
+
+    def cast(self, discard_pile: DiscardPile, player: Player):
         spell_card = self.draw()
-        deck.add_card(spell_card)
         spell_card.play(player)
+        discard_pile.add_card(spell_card)
         if self.breach_number == 4: player.damage_dealt += 1
         
         
