@@ -6,6 +6,8 @@ Created on Fri Mar 17 22:21:22 2023
 """
 from cardpile import CardPile
 from player import Player
+from card import Card
+from hand import Hand
 
 class Breach(CardPile):
     def __init__(self, cost_to_open: int, cost_to_focus: int, focus_stage: int, breach_number: str):
@@ -15,13 +17,19 @@ class Breach(CardPile):
         self.focussed = False
         self.pile = []
         self.breach_number = breach_number
-        
+
+    def __str__(self):
+        full_state = "Breach: " + str(self.breach_number) \
+        + "\n\t\tPrepared spell: " + str(self.pile) \
+        + "\n\t\tFocus stage: " + str(self.focus_stage)
+        return full_state
+
     def focus(self, player: Player, cost_free=False):
         if self.focus_stage == 0:
             return print("Breach " + self.breach_number + ": already open, cannot be focussed")
         elif cost_free == True:
             self.focussed = True
-            self.focus_stage -= 1            
+            self.focus_stage -= 1
         elif self.cost_to_focus > player.energy:
             return print("Breach " + self.breach_number + ": cannot afford to focus breach")
         else:
@@ -39,7 +47,8 @@ class Breach(CardPile):
             player.energy -= self.cost_to_open
             self.focus_stage = 0
 
-    def prepare_spell(self, card):
+    def prepare_spell(self, hand: Hand, card: Card):
+        card = hand.draw(card)
         if not card.card_type == "spell":
             return print(f"Failed to prepare {card}: it is not a spell")
         if not self.focussed and not self.focus_stage == 0:

@@ -21,10 +21,12 @@ class CardPile:
 
     def __len__(self):
         return len(self.pile)
-    
+
     def add_card(self, card):
         self.pile.append(card)
-        
+
     def draw(self):
         return self.pile.pop(0)
-    
+
+    def get_card(self, card):
+        return self.pile.pop(self.pile.index(card))

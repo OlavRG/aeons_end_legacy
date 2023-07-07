@@ -11,4 +11,3 @@ class Player:
         self.damage_dealt = 0
         self.energy = 0
         self.life = 10
-    
