@@ -92,7 +92,7 @@ class Game():
                         \n84. Buy a charge\
                         \n85. Activate charge power \
                         \n86. End main phase \
-                        ")
+                        \n")
         while len(self.hand):
             types_in_hand = [card.type for card in self.hand.pile]
             if "gem" in types_in_hand:
