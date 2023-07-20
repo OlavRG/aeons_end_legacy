@@ -5,8 +5,8 @@ Created on Sat Mar 25 12:04:54 2023
 @author: olavg
 """
 
+from actionresult import action_result
 from breach import Breach
-from card import Card
 from cards import Crystal, Spark
 from player import Player
 from deck import Deck
@@ -77,28 +77,33 @@ class Game():
             # end main phase: 1
             # Total: 48
         self.phase = "main phase"
-        action = input("Please enter the next move: \
-                        \nPlay a card: \
-                        \n\t1. Player card \
-                        \n\t2. Crystal \
-                        \n\t3. Spark \
-                        \n\t4. - 40. for gems (10), spells (16), and relics (10) in order seen at https://aeonsend.fandom.com/wiki/Legacy#Supply_Card_Gallery \
-                        \nBuy cards from the shop \
-                        \n\t41. - 77., same order. \
-                        \nFocus a breach: \
-                        \n\t 78 - 80\
-                        \nOpen a breach: \
-                        \n\t 81-83 \
-                        \n84. Buy a charge\
-                        \n85. Activate charge power \
-                        \n86. End main phase \
-                        \n")
-        while len(self.hand):
+        action = []
+        while action != '86':
+            action = input("Please enter the next move: \
+                            \nPlay a card: \
+                            \n\t1. Player card \
+                            \n\t2. Crystal \
+                            \n\t3. Spark \
+                            \n\t4. - 40. for gems (10), spells (16), and relics (10) in order seen at https://aeonsend.fandom.com/wiki/Legacy#Supply_Card_Gallery \
+                            \nBuy cards from the shop \
+                            \n\t41. - 77., same order. \
+                            \nFocus a breach: \
+                            \n\t 78 - 80\
+                            \nOpen a breach: \
+                            \n\t 81-83 \
+                            \n84. Buy a charge\
+                            \n85. Activate charge power \
+                            \n86. End main phase \
+                            \n")
+            action_result(self.player, self.hand, action)
+
+
+        """while len(self.hand):
             types_in_hand = [card.type for card in self.hand.pile]
             if "gem" in types_in_hand:
                 self.hand.play(self.hand.get_card_from_type("gem"), self.played_cards)
             else:
-                break
+                break"""
             # breach_focusses = [breach.focussed for breach in self.breaches]
             # breach_focus_stages = [breach.focus_stage for breach in self.breaches]
             # breaches_available = breach_focusses or (breach_focus_stages == 0)

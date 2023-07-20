@@ -23,10 +23,15 @@ action_result(action):
                             \n86. End main phase \
                             \n")
 """
+from hand import Hand
+from player import Player
 
-def action_result(action: int):
-    if action == 1:
+def action_result(player: Player, hand: Hand, action: int):
+    if action == '1':
         a = 5
-    elif action == 86: return
+    elif action == '2':
+        card = hand.get_card_from_name("Crystal")
+        card.play(player)
+    elif action == '86': return
     else:
         return print("Action " + action + " is not a legal action. Only legal actions are integers 1 - 86.")

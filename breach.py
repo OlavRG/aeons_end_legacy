@@ -53,8 +53,6 @@ class Breach(CardPile):
             return print(f"Failed to prepare {card}: it is not a spell")
         if not self.focussed and not self.focus_stage == 0:
             return print("Breach " + self.breach_number + f": is not focussed nor open. Focus stage = {self.focus_stage}.")
-        elif len(self.pile) > 1:
-            raise Exception("Breach " + self.breach_number + ": illegal play, multiple spells prepared on the same breach.")
         elif self.pile:
             return print("Breach " + self.breach_number + f": cannot prepare {card.name}. Breach is already occupied by {self.pile[0].name}")
         else:
@@ -64,7 +62,7 @@ class Breach(CardPile):
 
     def cast(self, discard_pile: DiscardPile, player: Player):
         spell_card = self.draw()
-        spell_card.play(player)
+        spell_card.cast(player)
         discard_pile.add_card(spell_card)
         if self.breach_number == 4: player.damage_dealt += 1
         

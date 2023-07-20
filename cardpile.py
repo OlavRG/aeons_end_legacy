@@ -11,6 +11,7 @@ Created on Fri Mar 17 18:21:41 2023
 
 @author: olavg
 """
+from card import Card
 
 class CardPile:
     def __init__(self):
@@ -34,7 +35,7 @@ class CardPile:
     def draw(self):
         return self.pile.pop(0)
 
-    def get_card_from_name(self, card_name: str):
+    def get_card_from_name(self, card_name: str) -> Card:
         pile_card_names = [card.name for card in self.pile]
         card_index = pile_card_names.index(card_name)
         card = self.pile[card_index]

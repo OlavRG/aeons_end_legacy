@@ -24,7 +24,7 @@ class Spark(Card):
         self.type = 'spell'
         self.cost = 0
 
-    def play(self, player):
+    def cast(self, player):
         player.damage_dealt += 1
         print(f"{player.name} cast {self.name}")
 
