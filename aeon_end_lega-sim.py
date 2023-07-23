@@ -18,8 +18,6 @@ if __name__ == '__main__':
 
     test_game = Game(inputs)
     print(test_game.hand)
-    test_game.breaches[0].prepare_spell(test_game.hand, test_game.hand.get_card_from_name("Crystal"))
-    test_game.breaches[0].prepare_spell(test_game.hand, test_game.hand.get_card_from_name("Spark"))
     test_game.casting_phase(inputs)
     print(test_game)
     test_game.main_phase(inputs)

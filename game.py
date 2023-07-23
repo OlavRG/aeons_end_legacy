@@ -95,7 +95,7 @@ class Game():
                             \n85. Activate charge power \
                             \n86. End main phase \
                             \n")
-            action_result(self.player, self.hand, action)
+            action_result(self.player, self.deck, self.hand, self.played_cards, self.discard_pile, self.shop, self.breaches, action)
 
 
         """while len(self.hand):

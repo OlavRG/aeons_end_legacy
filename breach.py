@@ -7,7 +7,6 @@ Created on Fri Mar 17 22:21:22 2023
 from cardpile import CardPile
 from player import Player
 from card import Card
-from hand import Hand
 from discardpile import DiscardPile
 
 class Breach(CardPile):
@@ -48,17 +47,23 @@ class Breach(CardPile):
             player.energy -= self.cost_to_open
             self.focus_stage = 0
 
-    def prepare_spell(self, hand: Hand, card: Card):
+    def prepare_spell(self, card: Card):
         if not card.type == "spell":
-            return print(f"Failed to prepare {card}: it is not a spell")
+            action_allowed = False
+            print(f"Failed to prepare {card}: it is not a spell")
+            return action_allowed
         if not self.focussed and not self.focus_stage == 0:
-            return print("Breach " + self.breach_number + f": is not focussed nor open. Focus stage = {self.focus_stage}.")
+            action_allowed = False
+            print("Breach " + self.breach_number + f": is not focussed nor open. Focus stage = {self.focus_stage}.")
+            return action_allowed
         elif self.pile:
-            return print("Breach " + self.breach_number + f": cannot prepare {card.name}. Breach is already occupied by {self.pile[0].name}")
+            action_allowed = False
+            print("Breach " + self.breach_number + f": cannot prepare {card.name}. Breach is already occupied by {self.pile[0].name}")
+            return action_allowed
         else:
-            self.add_card(card)
-            hand.remove_card(card)
+            action_allowed = True
             print("Prepared " + card.name + " to breach " + self.breach_number)
+            return action_allowed
 
     def cast(self, discard_pile: DiscardPile, player: Player):
         spell_card = self.draw()

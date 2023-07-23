@@ -23,15 +23,33 @@ action_result(action):
                             \n86. End main phase \
                             \n")
 """
-from hand import Hand
 from player import Player
+from deck import Deck
+from hand import Hand
+from playedcards import PlayedCards
+from discardpile import DiscardPile
 
-def action_result(player: Player, hand: Hand, action: int):
+def action_result(player: Player, deck: Deck, hand: Hand, played_cards: PlayedCards, discard_pile: DiscardPile, shop, breaches, action: str):
     if action == '1':
-        a = 5
+        card = hand.get_card_from_name("Crystal")
+        action_allowed = True
+        if action_allowed:
+            card.resolve_effect(player)
+            hand.remove_card(card)
+            played_cards.add_card(card)
     elif action == '2':
         card = hand.get_card_from_name("Crystal")
-        card.play(player)
+        action_allowed = True
+        if action_allowed:
+            card.resolve_effect(player)
+            hand.remove_card(card)
+            played_cards.add_card(card)
+    elif action == '3':
+        card = hand.get_card_from_name("Spark")
+        action_allowed = breaches[0].prepare_spell(card)
+        if action_allowed:
+            hand.remove_card(card)
+            breaches[0].add_card(card)
     elif action == '86': return
     else:
         return print("Action " + action + " is not a legal action. Only legal actions are integers 1 - 86.")

@@ -5,6 +5,7 @@ Created on Fri Mar 17 20:44:27 2023
 @author: olavg
 """
 
+from player import Player
 from card import Card
 
 
@@ -14,7 +15,7 @@ class Crystal(Card):
         self.type = 'gem'
         self.cost = 0
 
-    def play(self, player):
+    def resolve_effect(self, player):
         player.energy += 1
         print(f"{player.name} plays a {self.name}")
 
